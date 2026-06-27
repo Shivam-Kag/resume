@@ -1,0 +1,26 @@
+name: Build LaTeX Resume
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: shivam_kag_resume.tex
+          compiler: pdflatex
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: shivam_kag_resume
+          path: shivam_kag_resume.pdf
